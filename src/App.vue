@@ -23,7 +23,9 @@
         ></v-text-field>
         <v-row>
           <v-col
-            cols="3"
+            sm="4"
+            md="3"
+            lg="2"
             v-for="pokemon in filtered_pokemons || filtered_species"
             :key="pokemon.name"
           >
@@ -51,7 +53,9 @@
       <v-card v-if="selected_pokemon" class="px-4">
         <v-container>
           <v-row class="d-flex align-center">
-            <v-col cols="5">
+            <v-col sm="4"
+            md="3"
+            lg="2">
               <img
                 :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selected_pokemon.id}.png`"
                 :alt="selected_pokemon.name"
@@ -112,7 +116,7 @@
             <v-pagination
               v-model="page"
               class="my-4"
-              :length="15"
+              :length="3"
             ></v-pagination>
           </v-container>
         </v-col>
