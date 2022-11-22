@@ -53,9 +53,7 @@
       <v-card v-if="selected_pokemon" class="px-4">
         <v-container>
           <v-row class="d-flex align-center">
-            <v-col sm="4"
-            md="3"
-            lg="2">
+            <v-col sm="4" md="3" lg="2">
               <img
                 :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selected_pokemon.id}.png`"
                 :alt="selected_pokemon.name"
@@ -102,26 +100,27 @@
                   <td>{{ get_move_level(item) }}</td>
                   <td>{{ item.move.name }}</td>
                 </tr>
-
               </tbody>
             </template>
           </v-simple-table>
         </v-container>
       </v-card>
     </v-dialog>
-     <v-container>
+    <v-container>
       <v-row justify="center">
         <v-col cols="8">
           <v-container class="max-width">
             <v-pagination
               v-model="page"
               class="my-4"
-              :length="3"
+              :length="0"
             ></v-pagination>
+            <v-btn elevation="2" v-on:click="prevPage">prev</v-btn>
+            <v-btn elevation="2" v-on:click="nextPage">next</v-btn>
           </v-container>
         </v-col>
       </v-row>
-    </v-container>  
+    </v-container>
   </v-app>
 </template>
 
@@ -132,12 +131,13 @@ import axios from "axios";
 export default {
   name: "App",
 
-  components: {
-  },
+  components: {},
 
   data() {
     return {
+      url: "https://pokeapi.co/api/v2/pokemon?limit=30",
       pokemons: [],
+      pages: [],
       search: "",
       show_dialog: false,
       selected_pokemon: null,
@@ -145,14 +145,48 @@ export default {
   },
 
   mounted() {
+    //Local de url para substituir por rota da ApiRest desenvolvida. (https://github.com/henquesz/ApiRestSX)
     axios
-      //Local de url para substituir por rota da ApiRest desenvolvida. (https://github.com/henquesz/ApiRestSX)
-      .get("https://pokeapi.co/api/v2/pokemon?limit=1000")
+      .get(this.url)
       .then((response) => {
         this.pokemons = response.data.results;
+        this.pages =  response.data;
+        console.log(response)
       });
   },
   methods: {
+    nextPage() {
+      try{
+        this.url = this.pages.next
+        console.log(this.url)
+
+      axios
+      .get(this.url)
+      .then((response) => {
+        this.pokemons = response.data.results;
+        this.pages =  response.data;
+      });
+      }
+      catch(error){
+        console.log("erro next page");
+      }
+    },
+    prevPage() {
+      try{
+        this.url = this.pages.previous
+        console.log(this.pages.previous)
+
+        axios
+      .get(this.url)
+      .then((response) => {
+        this.pokemons = response.data.results;
+        this.pages =  response.data;
+      });
+      }
+      catch(error){
+        console.log("erro prev page");
+      }
+    },
     get_id(pokemon) {
       return Number(pokemon.url.split("/")[6]);
     },
@@ -221,6 +255,5 @@ export default {
   background-size: cover !important;
   background-position: center;
   min-height: 100vh;
-  
 }
 </style>
