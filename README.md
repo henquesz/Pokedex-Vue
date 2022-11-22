@@ -25,7 +25,7 @@ Clone o repósitorio através da URL https://github.com/henquesz/Pokedex.git.
 - Visualização de nomes e id's no card principal.
 - Ao clique do card, um modal aparece na tela, mostrando ao usuario imagem, nome, tipo do pokemon, altura, peso e os principais movimentos do mesmo.
 - Funcionalidade de filtragem por nome e tipo do pokemon.
-- Tentativa de pagination (não funcional).
+- Páginação de pokemons (30 por página)
 - Projeto responsivo.
 
 
