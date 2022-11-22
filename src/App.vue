@@ -154,8 +154,8 @@ export default {
     //Local de url para substituir por rota da ApiRest desenvolvida. (https://github.com/henquesz/ApiRestSX)
     axios.get(this.url).then((response) => {
       this.pokemons = response.data.pokemon.results;
-      this.pages = response.data;
-      console.log(response);
+      this.pages = response.data.pokemon;
+      console.log(this.pages);
     });
   },
   methods: {
@@ -163,9 +163,8 @@ export default {
       try {
         this.url = this.pages.next;
         console.log(this.url);
-
         axios.get(this.url).then((response) => {
-          this.pokemons = response.pokemon.data.results;
+          this.pokemons = response.data.results;
           this.pages = response.data;
         });
       } catch (error) {
