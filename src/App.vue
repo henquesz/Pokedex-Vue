@@ -26,7 +26,7 @@
             sm="4"
             md="3"
             lg="2"
-            v-for="pokemon in filtered_pokemons || filtered_species"
+            v-for="pokemon in filtered_pokemons"
             :key="pokemon.name"
           >
             <v-card @click="show_pokemon(get_id(pokemon))">
@@ -141,7 +141,7 @@ export default {
 
   data() {
     return {
-      url: "https://pokeapi.co/api/v2/pokemon?limit=18",
+      url: "https://poke-api-green-nu.vercel.app/api/poke/",
       pokemons: [],
       pages: [],
       search: "",
@@ -153,7 +153,7 @@ export default {
   mounted() {
     //Local de url para substituir por rota da ApiRest desenvolvida. (https://github.com/henquesz/ApiRestSX)
     axios.get(this.url).then((response) => {
-      this.pokemons = response.data.results;
+      this.pokemons = response.data.pokemon.results;
       this.pages = response.data;
       console.log(response);
     });
@@ -165,7 +165,7 @@ export default {
         console.log(this.url);
 
         axios.get(this.url).then((response) => {
-          this.pokemons = response.data.results;
+          this.pokemons = response.pokemon.data.results;
           this.pages = response.data;
         });
       } catch (error) {
@@ -229,11 +229,11 @@ export default {
         return item.name.includes(this.search);
       });
     },
-    filtered_species() {
-      return this.pokemons.filter((item) => {
-        return item.type.includes(this.search);
-      });
-    },
+    // filtered_species() {
+    //   return this.pokemons.filter((item) => {
+    //     return item.type.type.name.includes(this.search);
+    //   });
+    // },
   },
 };
 </script>
