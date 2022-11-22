@@ -108,15 +108,21 @@
     </v-dialog>
     <v-container>
       <v-row justify="center">
-        <v-col cols="8">
-          <v-container class="max-width">
-            <v-pagination
-              v-model="page"
-              class="my-4"
-              :length="0"
-            ></v-pagination>
-            <v-btn elevation="2" v-on:click="prevPage">prev</v-btn>
-            <v-btn elevation="2" v-on:click="nextPage">next</v-btn>
+        <v-col cols="2">
+          <v-container class="d-flex align-center">
+            <v-btn
+              elevation="5"
+              v-on:click="prevPage"
+              class="d-flex align-center"
+              >prev</v-btn
+            >
+            -
+            <v-btn
+              elevation="2"
+              v-on:click="nextPage"
+              class="d-flex align-center"
+              >next</v-btn
+            >
           </v-container>
         </v-col>
       </v-row>
@@ -135,7 +141,7 @@ export default {
 
   data() {
     return {
-      url: "https://pokeapi.co/api/v2/pokemon?limit=30",
+      url: "https://pokeapi.co/api/v2/pokemon?limit=18",
       pokemons: [],
       pages: [],
       search: "",
@@ -146,44 +152,36 @@ export default {
 
   mounted() {
     //Local de url para substituir por rota da ApiRest desenvolvida. (https://github.com/henquesz/ApiRestSX)
-    axios
-      .get(this.url)
-      .then((response) => {
-        this.pokemons = response.data.results;
-        this.pages =  response.data;
-        console.log(response)
-      });
+    axios.get(this.url).then((response) => {
+      this.pokemons = response.data.results;
+      this.pages = response.data;
+      console.log(response);
+    });
   },
   methods: {
     nextPage() {
-      try{
-        this.url = this.pages.next
-        console.log(this.url)
+      try {
+        this.url = this.pages.next;
+        console.log(this.url);
 
-      axios
-      .get(this.url)
-      .then((response) => {
-        this.pokemons = response.data.results;
-        this.pages =  response.data;
-      });
-      }
-      catch(error){
+        axios.get(this.url).then((response) => {
+          this.pokemons = response.data.results;
+          this.pages = response.data;
+        });
+      } catch (error) {
         console.log("erro next page");
       }
     },
     prevPage() {
-      try{
-        this.url = this.pages.previous
-        console.log(this.pages.previous)
+      try {
+        this.url = this.pages.previous;
+        console.log(this.pages.previous);
 
-        axios
-      .get(this.url)
-      .then((response) => {
-        this.pokemons = response.data.results;
-        this.pages =  response.data;
-      });
-      }
-      catch(error){
+        axios.get(this.url).then((response) => {
+          this.pokemons = response.data.results;
+          this.pages = response.data;
+        });
+      } catch (error) {
         console.log("erro prev page");
       }
     },
@@ -242,11 +240,11 @@ export default {
 
 <style>
 #app {
-  background: rgb(12, 39, 63);
+  background: rgb(0, 43, 48);
   background: radial-gradient(
       circle,
-      rgba(12, 39, 63, 1) 49%,
-      rgba(10, 10, 10, 1) 100%
+      rgba(0, 43, 48, 1) 0%,
+      rgba(22, 22, 22, 1) 100%
     )
     no-repeat center center fixed !important;
   -webkit-background-size: cover;
