@@ -141,7 +141,7 @@ export default {
 
   data() {
     return {
-      url: "https://poke-api-green-nu.vercel.app/api/poke/",
+      url: "https://pokeapivini.herokuapp.com/api/poke",
       pokemons: [],
       pages: [],
       search: "",
