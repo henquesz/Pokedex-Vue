@@ -10,7 +10,7 @@ Neste projeto, você irá encontrar uma pokedex desenvolvida em vue e vuetify, j
 ![App Screenshot](https://i.pinimg.com/564x/d3/37/31/d3373121f2240bc1e5f6f8deb8a1ec62.jpg)
 
 
-## Instalação
+## Instalação e utilização
 
 Clone o repósitorio através da URL https://github.com/henquesz/Pokedex.git.
 
